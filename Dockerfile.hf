@@ -1,21 +1,8 @@
-FROM node:20-alpine
+FROM qwertyuiop8899/selfstream:warp
 
-# Installa git (necessario su Alpine)
-RUN apk add --no-cache git
-
-WORKDIR /app
-
-# Clona il repository direttamente nella cartella /app
-RUN git clone https://github.com/vostrousergithub/vostroforkname .
-
-# Installa le dipendenze
-RUN npm install
-
-# HF usa la porta 7860
+# HuggingFace: 7860 | Koyeb: 8000 | Render: 10000
+# Override PORT via platform env vars if needed
 ENV PORT=7860
 EXPOSE 7860
 
-# Compila l'addon
-RUN npm run build
-
-CMD ["npm", "start"]
+CMD ["node", "dist/addon.js"]
